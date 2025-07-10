@@ -8,6 +8,7 @@ import {io} from "socket.io-client"
 import { useAccount } from 'wagmi'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import Logout from './LogOut.jsx'
+import logo from '../public/TipC.png'
 
 function App() {
   const [users, setUsers] = useState([])
@@ -69,7 +70,7 @@ function App() {
         </div>
         <div className='flex flex-col gap-3 mt-3 mb-3 ml-2'>
           <div className='flex flex-row items-center justify-start gap-0 mb-10'>
-            <img className='w-32 p-0 m-0' src="../../public/TipC.png" alt="Loggo"  />
+            <img className='w-32 p-0 m-0' src={logo} alt="Loggo"  />
             <h1 className='text-3xl m-0 p-0 text-cyan-700 font-extrabold'>TIPChat</h1>
            <div className='absolute top-0 right-0'>
             <Logout/>
