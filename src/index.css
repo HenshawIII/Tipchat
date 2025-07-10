@@ -1,0 +1,33 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* global.css*/
+
+.emoji-picker-react{
+	background-color: #555;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #eeefef;
+	border-radius: 5px;
+    scrollbar-width: thin;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #555;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
