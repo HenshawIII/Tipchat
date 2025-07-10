@@ -7,6 +7,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from 'wagmi'
 import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
+import logo from '../../public/TipC.png'
 
 function Login() {
   const [name, setName] = useState("");
@@ -40,29 +41,38 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!isConnected) {
-      toast.error("Please connect your wallet before submitting.");
-      setLoading(false);
-      return;
+    try {
+      if (!isConnected) {
+        toast.error("Please connect your wallet before submitting.");
+        setLoading(false);
+        return;
+      }
+      if (!name) {
+        toast.error("Please enter your name.");
+        setLoading(false);
+        return;
+      }
+      const payload = {
+        name,
+        wallet: address,
+      };
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL + "/login", payload);
+      const data = response.data;
+      if (data.error) {
+        toast.error(data.error);
+      } else if (data.user) {
+        sessionStorage.setItem("chat-user", JSON.stringify(data.user));
+        navigate("/chat");
+      } else {
+        toast.error("Unexpected server response. Please try again.");
+      }
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Network error or server unavailable. Please try again later.");
+      }
     }
-    if (!name) {
-      toast.error("Please enter your name.");
-      setLoading(false);
-      return;
-    }
-    const payload = {
-      name,
-      wallet: address,
-    };
-    await axios.post(import.meta.env.VITE_BACKEND_URL + "/login", payload)
-      .then(data => {
-        if (data.data.error) {
-          toast.error(data.data.error);
-        } else {
-          sessionStorage.setItem("chat-user", JSON.stringify(data.data.user));
-          navigate("/chat");
-        }
-      });
     setName("");
     setLoading(false);
   }
@@ -81,7 +91,7 @@ function Login() {
       </div>
       <div className='flex flex-col h-3/4 bg-transparent text-white w-full max-w-md rounded-xl p-4 items-center justify-center mx-auto z-10'>
         <div className='flex flex-col items-center mb-10'>
-          <img className='w-32 mx-2 ' src="../../public/TipC.png" alt="Loggo" onClick={() => setShowP(p => !p)} />
+          <img className='w-32 mx-2 ' src={logo} alt="Loggo" onClick={() => setShowP(p => !p)} />
           <h1 className='text-3xl font-semibold'>TIPChat</h1>
         </div>
         <form className='flex flex-col' onSubmit={handleSubmit}>

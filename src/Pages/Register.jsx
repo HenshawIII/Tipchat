@@ -9,9 +9,10 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from 'wagmi'
 import Navbar from '../Navbar'
 import { Link } from 'react-router-dom'
+import logo from '../../public/TipC.png'
 
 
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 
 function LoginNavbar() {
   const user = JSON.parse(sessionStorage.getItem('chat-user'));
@@ -51,31 +52,40 @@ function Register() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     setLoading(true);
-    if (!isConnected) {
-      toast.error("Please connect your wallet before submitting.");
-      setLoading(false);
-      return;
+    try {
+      if (!isConnected) {
+        toast.error("Please connect your wallet before submitting.");
+        setLoading(false);
+        return;
+      }
+      const { name } = values;
+      if (!name || !image) {
+        toast.error("Please fill in all fields and upload an image.");
+        setLoading(false);
+        return;
+      }
+      const payload = {
+        name,
+        image, // base64 string
+        wallet: address,
+      };
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL + "/register", payload);
+      const data = response.data;
+      if (data.error) {
+        toast.error(data.error);
+      } else if (data.user) {
+        sessionStorage.setItem("chat-user", JSON.stringify(data.user));
+        navigate("/chat");
+      } else {
+        toast.error("Unexpected server response. Please try again.");
+      }
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Network error or server unavailable. Please try again later.");
+      }
     }
-    const { name } = values;
-    if (!name || !image) {
-      toast.error("Please fill in all fields and upload an image.");
-      setLoading(false);
-      return;
-    }
-    const payload = {
-      name,
-      image, // base64 string
-      wallet: address,
-    };
-    await axios.post(import.meta.env.VITE_BACKEND_URL + "/register", payload)
-      .then(data => {
-        if (data.data.error) {
-          toast.error(data.data.error);
-        } else {
-          sessionStorage.setItem("chat-user", JSON.stringify(data.data.user));
-          navigate("/chat");
-        }
-      });
     setValue({ name: "" });
     setImage("");
     setLoading(false);
@@ -98,7 +108,7 @@ hoverFillColor='#1c3c9e'
 </div>
          <div className='flex flex-col h-3/4 bg-transparent text-white w-full max-w-md rounded-xl p-4 items-center justify-center mx-auto z-50'>
             <div className='flex flex-col items-center mb-10'>
-              <img className='w-32 mx-2 ' src="../../public/TipC.png" alt="Loggo" onClick={()=>setShowP(p=>!p)} />
+              <img className='w-32 mx-2 ' src={logo} alt="Loggo" onClick={()=>setShowP(p=>!p)} />
               <h1 className='text-3xl font-semibold'>TIPChat</h1>
             </div>
             <form className='flex flex-col z-50' onSubmit={e=>handleSubmit(e)}>
