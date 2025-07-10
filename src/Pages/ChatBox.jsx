@@ -21,7 +21,7 @@ function ChatBox({cuurentChat,socket}) {
 
     useEffect(()=>{
       (async()=>{
-       await axios.post('http://localhost:8224/getallmess',{
+       await axios.post(import.meta.env.VITE_BACKEND_URL + '/getallmess',{
           from:User._id,
           to:cuurentChat._id
         })
@@ -33,7 +33,7 @@ function ChatBox({cuurentChat,socket}) {
     },[cuurentChat])
 
     const handleSendMsg = async(msg)=>{
-      await axios.post("http://localhost:8224/addmessage",{
+      await axios.post(import.meta.env.VITE_BACKEND_URL + "/addmessage",{
         from:User._id,
         to:cuurentChat._id,
         message:msg

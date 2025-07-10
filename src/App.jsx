@@ -29,13 +29,13 @@ function App() {
 
   useEffect(()=>{
     if(sessionStorage.getItem("chat-user")){
-      socket.current = io("http://localhost:8224")
+      socket.current = io(import.meta.env.VITE_BACKEND_URL)
       socket.current.emit("add-user",User?._id)
     }
   },[])
 
   useEffect(()=>{
-    axios.get(`http://localhost:8224/getusers/${User?._id}`)
+    axios.get(import.meta.env.VITE_BACKEND_URL + `/getusers/${User?._id}`)
     .then(dat=>{
       setUsers(dat)
   })},[])

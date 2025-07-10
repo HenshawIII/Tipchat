@@ -28,7 +28,7 @@ function Profile() {
     setError("");
     try {
       // Replace with your actual API endpoint
-      const res = await axios.post(`http://localhost:8224/update-image/${user._id}`, { image });
+      const res = await axios.post(import.meta.env.VITE_BACKEND_URL + `/update-image/${user._id}`, { image });
       if (res.data && res.data.success) {
         setSuccess("Image updated successfully!");
         // Optionally update sessionStorage

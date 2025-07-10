@@ -54,7 +54,7 @@ function Login() {
       name,
       wallet: address,
     };
-    await axios.post("http://localhost:8224/login", payload)
+    await axios.post(import.meta.env.VITE_BACKEND_URL + "/login", payload)
       .then(data => {
         if (data.data.error) {
           toast.error(data.data.error);
@@ -81,7 +81,7 @@ function Login() {
       </div>
       <div className='flex flex-col h-3/4 bg-transparent text-white w-full max-w-md rounded-xl p-4 items-center justify-center mx-auto z-10'>
         <div className='flex flex-col items-center mb-10'>
-          <img className='w-32 mx-2 ' src="../../public/Tipc.png" alt="Loggo" onClick={() => setShowP(p => !p)} />
+          <img className='w-32 mx-2 ' src="../../public/TipC.png" alt="Loggo" onClick={() => setShowP(p => !p)} />
           <h1 className='text-3xl font-semibold'>TIPChat</h1>
         </div>
         <form className='flex flex-col' onSubmit={handleSubmit}>
