@@ -22,7 +22,7 @@ function Landing() {
           />
         </div>
         {/* Hero content */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-6xl px-4 py-8 md:py-16 gap-8 md:gap-0">
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-6xl px-4 py-8 md:py-32 pt-36 gap-8 md:gap-0">
           <div className="flex flex-col items-start w-full md:w-2/3 max-w-2xl">
             <h1 className="md:text-6xl text-3xl font-extrabold text-white mb-4 leading-tight">Welcome to <span className='text-[#CCF697]/80'>TIPChat</span></h1>
             <p className="md:text-2xl text-lg text-white mb-6">TIPChat is a modern chat platform where you can:</p>
