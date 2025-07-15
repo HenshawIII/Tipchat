@@ -12,11 +12,11 @@ function Navbar() {
       </div>
       <div className="flex items-center gap-4">
         {user ? (
-          <Link to= "/chat" className="text-blue-600 font-semibold hover:underline p-3 z-10">Chat</Link>
+          <Link to= "/chat" className="text-cyan-600 font-semibold hover:underline p-3 z-10">Chat</Link>
         ) : (
           <>
-            <Link to="/login" className="text-blue-600 font-semibold hover:underline">Login</Link>
-            <Link to="/register" className="text-blue-600 font-semibold hover:underline">Register</Link>
+            <Link to="/login" className="text-cyan-600 font-semibold hover:underline">Login</Link>
+            <Link to="/register" className="text-cyan-600 font-semibold hover:underline">Register</Link>
           </>
         )}
       </div>

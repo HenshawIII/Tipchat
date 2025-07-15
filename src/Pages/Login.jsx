@@ -30,7 +30,7 @@ function Login() {
           ) : (
             <>
               <Link to="/login" className="text-cyan-600 font-semibold hover:underline">Login</Link>
-              <Link to="/register" className="text-white font-semibold hover:underline">Register</Link>
+              <Link to="/register" className="text-cyan-600 font-semibold hover:underline">Register</Link>
             </>
           )}
         </div>
