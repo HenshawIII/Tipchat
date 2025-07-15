@@ -5,7 +5,7 @@ import axios from 'axios'
 import Welcome from './Pages/Welcome.jsx'
 import ChatBox from './Pages/ChatBox.jsx'
 import {io} from "socket.io-client"
-import { useAccount } from 'wagmi'
+// import { useAccount } from 'wagmi'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import Logout from './LogOut.jsx'
 import logo from '../public/TipC.png'
@@ -17,7 +17,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
   const socket = useRef()
-  const { address, isConnected } = useAccount()
+  // const { address, isConnected } = useAccount()
   const [search, setSearch] = useState("");
 
   let User = JSON.parse(sessionStorage.getItem("chat-user"))
@@ -59,7 +59,7 @@ function App() {
       ></div>
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-blue-200/70 shadow-lg z-50 transform transition-transform duration-300 md:static md:col-span-1 md:w-auto  md:shadow-none md:translate-x-0
+        className={`fixed top-0 overflow-y-auto left-0 h-full w-64 bg-blue-200/70 shadow-lg z-50 transform transition-transform duration-300 md:static md:col-span-1 md:w-auto  md:shadow-none md:translate-x-0
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
         {/* Close button for mobile */}
@@ -72,7 +72,15 @@ function App() {
           <div className='flex flex-row items-center justify-start gap-0 mb-10'>
             <img className='w-32 p-0 m-0' src={logo} alt="Loggo"  />
             <h1 className='text-3xl m-0 p-0 text-cyan-700 font-extrabold'>TIPChat</h1>
-           <div className='absolute top-0 right-0'>
+           <div className='absolute flex flex-row gap-2 top-0 md:right-0 right-12'>
+           {User ? (
+            <Link to='/profile' className='w-10 flex flex-row gap-1 py-2  '>
+              {/* <p className='py-2 pl-2'>Welcomee</p> */}
+              {/* <p className=' py-2 font-bold text-lg'>Profile</p> */}
+              <img src={`${User?.image}`} alt="d" />
+            </Link>
+
+          ) : <p>Out</p>}
             <Logout/>
            </div>
             
@@ -112,14 +120,7 @@ function App() {
               Loading users...
             </div>
           )}
-          {User ? (
-            <Link to='/profile' className='w-10 flex fixed bottom-0 left-2 flex-row gap-2 mt-6  '>
-              {/* <p className='py-2 pl-2'>Welcomee</p> */}
-              <p className=' py-2 font-bold text-lg'>Profile</p>
-              <img src={`${User?.image}`} alt="d" />
-            </Link>
-
-          ) : <p>Out</p>}
+         
         </div>
       </div>
       {/* Main chat area */}

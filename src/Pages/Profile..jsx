@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import Navbar from '../Navbar'
+import { useBalance } from 'wagmi'
+import { parseEther } from 'viem'
 
 function Profile() {
   const user = JSON.parse(sessionStorage.getItem('chat-user'));
@@ -9,7 +11,13 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
+  const { data: balance, isLoading: balanceLoading, error: balanceError } = useBalance({
+    address: user.wallet,
+  });
+  // console.log(balance)
+  // useEffect(() => {
+  //   console.log(parseEther(balance.formatted))
+  // }, [balance])
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -56,6 +64,13 @@ function Profile() {
         />
         <p className="mb-2 text-lg font-semibold">{user.name}</p>
         <p className="mb-4 text-gray-600 break-all text-sm">{user.wallet}</p>
+        {balanceLoading ? (
+          <p className="text-gray-500 text-sm mb-2">Loading balance...</p>
+        ) : balanceError ? (
+          <p className="text-red-500 text-sm mb-2">{balanceError}</p>
+        ) : (
+          <p className="text-gray-700 text-lg font-semibold mb-2">Balance: <span className='text-blue-700'>{Number(balance?.formatted).toFixed(4)} {balance?.symbol}</span></p>
+        )}
         <label className="mb-2 font-medium">Change Image</label>
         <input
           type="file"
