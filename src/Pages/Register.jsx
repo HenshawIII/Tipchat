@@ -109,7 +109,7 @@ hoverFillColor='#1c3c9e'
          <div className='flex flex-col h-3/4 bg-transparent text-white w-full max-w-md rounded-xl p-4 items-center justify-center mx-auto z-50'>
             <div className='flex flex-col items-center mb-10'>
               <img className='w-32 mx-2 ' src={logo} alt="Loggo" onClick={()=>setShowP(p=>!p)} />
-              <h1 className='text-3xl font-semibold'>TIPChat</h1>
+              <h1 className='text-3xl font-semibold'>Create an account</h1>
             </div>
             <form className='flex flex-col z-50' onSubmit={e=>handleSubmit(e)}>
           

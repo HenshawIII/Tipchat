@@ -40,7 +40,7 @@ function Landing() {
             {user ? (
               <Link to="/chat" className="mt-2 bg-gradient-to-r from-cyan-600 to-[#ccf697]/70 text-white px-4 py-2 rounded hover:bg-cyan-700 font-semibold">Go to Chat</Link>
             ) : (
-              <Link to="/login" className="mt-2 bg-gradient-to-r from-cyan-600 to-[#ccf697]/70 text-white px-4 py-2 rounded hover:bg-cyan-700 font-semibold">Get Started</Link>
+              <Link to="/register" className="mt-2 bg-gradient-to-r from-cyan-600 to-[#ccf697]/70 text-white px-4 py-2 rounded hover:bg-cyan-700 font-semibold">Get Started</Link>
             )}
           </div>
           <div className="flex-shrink-0 flex items-center justify-center w-full md:w-auto">
