@@ -141,7 +141,7 @@ hoverFillColor='#1c3c9e'
 />
             </form>
          { image && <img className='w-1/2 text-gray-900 rounded-md mx-auto' src={image} alt="Loggo" />}
-            <ConnectButton label="Connect Wallet" chainStatus="none"  />
+            <ConnectButton label="Connect Wallet" chainStatus="full"  />
          </div>
     </div>    
   )

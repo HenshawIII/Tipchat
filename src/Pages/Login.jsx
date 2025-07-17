@@ -104,7 +104,7 @@ function Login() {
             disabled={loading}
           />
         </form>
-        <ConnectButton label="Connect Wallet" chainStatus="none" />
+        <ConnectButton label="Connect Wallet" chainStatus="full" />
       </div>
     </div>
   )
