@@ -101,7 +101,7 @@ function Landing() {
       <footer className="w-full bg-gradient-to-r from-[#121e42] to-cyan-700 text-center py-10 text-white font-medium shadow-inner mt-auto text-lg flex flex-col items-center justify-center min-h-[120px]">
         &copy; {new Date().getFullYear()} TIPChat. Built for chatting and Sending ETH.
         <div className='flex flex-row items-center justify-center gap-2 mt-2'>
-          Made with ❤️ by <a href="https://X.com/devansa01" className='text-cyan-200 font-bold'target='_blank' rel='noopener noreferrer'>Inameti</a>
+          Made by <a href="https://X.com/devansa01" className='text-cyan-200 font-bold'target='_blank' rel='noopener noreferrer'>Inameti</a>
         </div>
       </footer>
     </div>
